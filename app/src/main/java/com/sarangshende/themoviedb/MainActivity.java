@@ -21,11 +21,9 @@ import com.sarangshende.themoviedb.interfaces.MovieDBInterface;
 import com.sarangshende.themoviedb.models.AllMovies;
 import com.sarangshende.themoviedb.models.MovieItem;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -34,7 +32,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static android.icu.text.UnicodeSet.CASE;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -64,7 +61,7 @@ public class MainActivity extends AppCompatActivity
         spinner_list.add("Sort by Date");
         spinner_list.add("Sort by Ratings");
 
-        arrayAdapter_spinner = new ArrayAdapter<String>(this.getApplicationContext(),
+        arrayAdapter_spinner = new ArrayAdapter<>(this.getApplicationContext(),
                 R.layout.simple_spinner_dropdown_item, spinner_list);
         arrayAdapter_spinner    .setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         spinner_sort_list       .setAdapter(arrayAdapter_spinner);
