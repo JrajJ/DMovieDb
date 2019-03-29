@@ -7,53 +7,33 @@ import android.graphics.Point;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.sarangshende.themoviedb.NetworkCheck.CheckNetwork;
-import com.sarangshende.themoviedb.adapters.___MoviesAdapter;
-import com.sarangshende.themoviedb.adapters.___MoviesDetailsAdapter;
 import com.sarangshende.themoviedb.connecttoserver.ConnectToServer;
 import com.sarangshende.themoviedb.interfaces.MovieDBInterface;
-import com.sarangshende.themoviedb.models.AllMovies;
 import com.sarangshende.themoviedb.models.MovieDetails;
-import com.sarangshende.themoviedb.models.MovieItem;
 import com.squareup.picasso.Picasso;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static android.icu.text.UnicodeSet.CASE;
-
 public class MovieDetailsActivity extends AppCompatActivity
 {
     Context context;
     private RecyclerView mRecyclerViewMovieDetails;
-    private ___MoviesDetailsAdapter mAdapterMovieDetails;
     ProgressDialog mProgressDialog;
     private ArrayList<MovieDetails> mArrayListMovieDetails;
     Spinner spinner_sort_list;
@@ -142,15 +122,15 @@ public class MovieDetailsActivity extends AppCompatActivity
                     MOVIE_NAME.setText(mArrayListMovieDetails.get(0).getTitle());
                     MOVIE_DATE.setText(mArrayListMovieDetails.get(0).getReleaseDate());
                     MOVIE_DESC.setText(mArrayListMovieDetails.get(0).getOverview());
-                    MOVIE_ID.setText(mArrayListMovieDetails.get(0).getId());
+                    MOVIE_ID.setText(String.valueOf(mArrayListMovieDetails.get(0).getId()));
                     MOVIE_RATING.setText(String.valueOf(mArrayListMovieDetails.get(0).getVoteAverage()));
                     MOVIE_LANGUAGE.setText(mArrayListMovieDetails.get(0).getOriginalLanguage()+" | ");
-                    MOVIE_VOTES.setText(mArrayListMovieDetails.get(0).getVoteCount());
-                    MOVIE_BUDGET.setText(mArrayListMovieDetails.get(0).getBudget());
-                    MOVIE_GENRE.setText(mArrayListMovieDetails.get(0).getGenres().get(0).getName());
-                    MOVIE_REVENUE.setText(mArrayListMovieDetails.get(0).getRevenue());
+                    MOVIE_VOTES.setText(" | "+String.valueOf(mArrayListMovieDetails.get(0).getVoteCount())+" Votes");
+                    MOVIE_BUDGET.setText("Budget : "+String.valueOf(mArrayListMovieDetails.get(0).getBudget()));
+                    MOVIE_GENRE.setText(mArrayListMovieDetails.get(0).getGenres().get(0).getName()+" | ");
+                    MOVIE_REVENUE.setText("Revenue : "+String.valueOf(mArrayListMovieDetails.get(0).getRevenue()));
                     MOVIE_TAGLINE.setText(mArrayListMovieDetails.get(0).getTagline());
-                    MOVIE_RUNTIME.setText(mArrayListMovieDetails.get(0).getRuntime()+" | ");
+                    MOVIE_RUNTIME.setText(String.valueOf(mArrayListMovieDetails.get(0).getRuntime())+"Mins");
                     MOVIE_PRODUCTION_COMPANY.setText(mArrayListMovieDetails.get(0).getProductionCompanies().get(0).getName()+" | "+
                             mArrayListMovieDetails.get(0).getProductionCompanies().get(0).getOriginCountry());
 
@@ -173,7 +153,7 @@ public class MovieDetailsActivity extends AppCompatActivity
                     if(width>800) {
                         Picasso.with(context).
                                 load(mArrayListMovieDetails.get(0).getPosterPath())
-                                .resize(width_custom, heightt_custom)
+                                .resize(width_custom+200, heightt_custom+250)
 
                                 .into(MOVIE_IMAGE, new com.squareup.picasso.Callback() {
                                     @Override
@@ -192,7 +172,7 @@ public class MovieDetailsActivity extends AppCompatActivity
                     else {
                         Picasso.with(context).
                                 load(mArrayListMovieDetails.get(0).getPosterPath())
-                                .resize(width_custom, heightt_custom)
+                                .resize(width_custom+100, heightt_custom+150)
 
                                 .into(MOVIE_IMAGE, new com.squareup.picasso.Callback() {
                                     @Override
