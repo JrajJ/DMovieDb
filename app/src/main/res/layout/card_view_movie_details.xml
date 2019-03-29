@@ -135,13 +135,11 @@
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
                 <TextView
-
                     android:id="@+id/__MOVIE_DETAILS_DATE"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Date"
                     android:typeface="sans"
-
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
@@ -160,13 +158,14 @@
 
             <TextView
                 android:layout_marginTop="@dimen/margin_6"
-                android:id="@+id/__MOVIE_DETAILS_PRDC_COMPANY"
+                android:id="@+id/__MOVIE_DETAILS_PRDC_COMPANY_NAME"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
-                android:text="Production Company"
+                android:text="Production Company Name"
                 android:textSize="14sp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
 
 
             <TextView
@@ -178,7 +177,6 @@
                 android:text="Budget"
                 android:textSize="14sp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-
 
 
             <TextView

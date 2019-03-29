@@ -22,22 +22,21 @@ import android.widget.Toast;
 import com.sarangshende.themoviedb.MovieDetailsActivity;
 import com.sarangshende.themoviedb.NetworkCheck.CheckNetwork;
 import com.sarangshende.themoviedb.R;
+import com.sarangshende.themoviedb.models.GenresItem;
 import com.sarangshende.themoviedb.models.MovieDetails;
+import com.sarangshende.themoviedb.models.ProductionCompaniesItem;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class ___MoviesDetailsAdapter extends RecyclerView.Adapter<___MoviesDetailsAdapter.ViewHolder> implements Filterable
+public class ___MoviesDetailsAdapter extends RecyclerView.Adapter<___MoviesDetailsAdapter.ViewHolder>
 {
-    private ArrayList<MovieDetails> mArrayList;
     private ArrayList<MovieDetails> mFilteredList;
     private Context ctx ;
-    int num = 1;
 
 
     public ___MoviesDetailsAdapter(ArrayList<MovieDetails> arrayList)
     {
-        mArrayList = arrayList;
         mFilteredList = arrayList;
     }
 
@@ -54,7 +53,6 @@ public class ___MoviesDetailsAdapter extends RecyclerView.Adapter<___MoviesDetai
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i)
     {
-        Bitmap bitmap;
         viewHolder.MOVIE_NAME.setText(mFilteredList.get(i).getTitle());
         viewHolder.MOVIE_DATE.setText(mFilteredList.get(i).getReleaseDate());
         viewHolder.MOVIE_DESC.setText(mFilteredList.get(i).getOverview());
@@ -63,8 +61,28 @@ public class ___MoviesDetailsAdapter extends RecyclerView.Adapter<___MoviesDetai
         Log.e("MOVIE_RATING   =   ","_____________________________________"+viewHolder.MOVIE_RATING.getText()+"===");
 
         viewHolder.MOVIE_VOTES.setText(Integer.toString(mFilteredList.get(i).getVoteCount())+" Votes");
+        viewHolder.MOVIE_RUNTIME.setText(Integer.toString(mFilteredList.get(i).getRuntime())+" | ");
+        viewHolder.MOVIE_BUDGET.setText(Integer.toString(mFilteredList.get(i).getBudget()));
+        viewHolder.MOVIE_REVENUE.setText(Integer.toString(mFilteredList.get(i).getRevenue()));
+        viewHolder.MOVIE_TAGLINE.setText(mFilteredList.get(i).getTagline());
 
-        viewHolder.MOVIE_LANGUAGE.setText(mFilteredList.get(i).getOriginalLanguage()+" | ");
+        ArrayList<GenresItem> genreList = new ArrayList<>(mFilteredList.get(i).getGenres());
+        ArrayList<ProductionCompaniesItem> productionCompanyList = new ArrayList<>(mFilteredList.get(i).getProductionCompanies());
+        String genre_str = "",production_company_str = "";
+        for(i=0;i<genreList.size();i++)
+        {
+            genre_str = genre_str.concat(genreList.get(i).getName()+",");
+        }
+
+        for(i=0;i<productionCompanyList.size();i++)
+        {
+            production_company_str = production_company_str.concat(productionCompanyList.get(i).getName());
+        }
+        viewHolder.MOVIE_GENRE.setText(genre_str);
+        viewHolder.MOVIE_PRODUCTION_COMPANY.setText(production_company_str);
+
+
+
         WindowManager wm = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
         assert wm != null;
         Display display = wm.getDefaultDisplay();
@@ -84,8 +102,7 @@ public class ___MoviesDetailsAdapter extends RecyclerView.Adapter<___MoviesDetai
                         Picasso.with(ctx).
                             load(mFilteredList.get(i).getPosterPath())
                             .resize(width_custom, heightt_custom)
-                            //.memoryPolicy(MemoryPolicy.NO_CACHE)
-                            //.centerInside()
+
                             .into(viewHolder.MOVIE_IMAGE, new com.squareup.picasso.Callback() {
                                 @Override
                                 public void onSuccess() {
@@ -136,62 +153,18 @@ public class ___MoviesDetailsAdapter extends RecyclerView.Adapter<___MoviesDetai
 
     @Override
     public int getItemCount() {
-        /*if(num*100 > mFilteredList.size()){
-            return mFilteredList.size();
-        }else{
-            return num*100;
-        }*/
+
         return mFilteredList.size();
     }
 
 
 
-    @Override
-    public Filter getFilter()
-    {
-        return new Filter()
-        {
-            @Override
-            protected FilterResults performFiltering(CharSequence charSequence)
-            {
 
-                String charString = charSequence.toString();
-
-                if (charString.isEmpty()) {
-
-                    mFilteredList = mArrayList;
-                } else {
-
-                    ArrayList<MovieDetails> filteredList = new ArrayList<>();
-
-                    for (MovieDetails movieItem : mArrayList) {
-
-                        if (movieItem.getTitle().toLowerCase().contains(charString))
-                        {
-
-                            filteredList.add(movieItem);
-                        }
-                    }
-
-                    mFilteredList = filteredList;
-                }
-
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = mFilteredList;
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                mFilteredList = (ArrayList<MovieDetails>) filterResults.values;
-                notifyDataSetChanged();
-            }
-        };
-    }
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        private TextView MOVIE_NAME,MOVIE_DATE,MOVIE_DESC,MOVIE_ID,MOVIE_RATING,MOVIE_LANGUAGE,MOVIE_VOTES;
+        private TextView MOVIE_NAME,MOVIE_DATE,MOVIE_DESC,MOVIE_ID,MOVIE_RATING,MOVIE_LANGUAGE,MOVIE_VOTES,
+                MOVIE_BUDGET,MOVIE_GENRE,MOVIE_PRODUCTION_COMPANY, MOVIE_REVENUE,MOVIE_RUNTIME,MOVIE_TAGLINE;
         ProgressBar pb;
         ImageButton MOVIE_IMAGE;
 
@@ -200,35 +173,24 @@ public class ___MoviesDetailsAdapter extends RecyclerView.Adapter<___MoviesDetai
             super(view);
             ctx = view.getContext();
 
-            MOVIE_NAME      = view.findViewById(R.id.__MOVIE_NAME);
-            MOVIE_DATE      = view.findViewById(R.id.__MOVIE_DATE);
-            MOVIE_DESC      = view.findViewById(R.id.__MOVIE_DESC);
-            MOVIE_ID        = view.findViewById(R.id.__MOVIE_ID);
-            MOVIE_RATING    = view.findViewById(R.id.__MOVIE_RATING);
-            MOVIE_LANGUAGE  = view.findViewById(R.id.__MOVIE_LANGUAGE);
-            MOVIE_VOTES     = view.findViewById(R.id.__MOVIE_VOTES);
+            MOVIE_NAME      = view.findViewById(R.id.__MOVIE_DETAILS_NAME);
+            MOVIE_DATE      = view.findViewById(R.id.__MOVIE_DETAILS_DATE);
+            MOVIE_DESC      = view.findViewById(R.id.__MOVIE_DETAILS_DESC);
+            MOVIE_ID        = view.findViewById(R.id.__MOVIE_DETAILS_ID);
+            MOVIE_RATING    = view.findViewById(R.id.__MOVIE_DETAILS_RATING);
+            MOVIE_LANGUAGE  = view.findViewById(R.id.__MOVIE_DETAILS_LANGUAGE);
+            MOVIE_VOTES     = view.findViewById(R.id.__MOVIE_DETAILS_VOTES);
             pb              = view.findViewById(R.id.progress_bar_circular);
-            MOVIE_IMAGE     = view.findViewById(R.id.__MOVIE_IMAGE);
+            MOVIE_BUDGET     = view.findViewById(R.id.__MOVIE_DETAILS_BUDGET);
+            MOVIE_GENRE     = view.findViewById(R.id.__MOVIE_DETAILS_GENRE);
+            MOVIE_PRODUCTION_COMPANY     = view.findViewById(R.id.__MOVIE_DETAILS_PRDC_COMPANY_NAME);
+            MOVIE_REVENUE     = view.findViewById(R.id.__MOVIE_DETAILS_REVENUE);
+            MOVIE_RUNTIME     = view.findViewById(R.id.__MOVIE_DETAILS_RUNTIME);
+            MOVIE_TAGLINE     = view.findViewById(R.id.__MOVIE_DETAILS_TAGLINE);
 
            //=============================================================================================
 
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view)
-                {
-                    if(CheckNetwork.isInternetAvailable(ctx))
-                    {
-                        Intent i = new Intent(ctx,MovieDetailsActivity.class);
-                        i.putExtra("id",    MOVIE_ID.getText().toString().trim());
 
-                        ctx.startActivity(i);
-                    }
-                    else
-                    {
-                        Toast.makeText(ctx, "No Internet Connection", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
         }
     }
 

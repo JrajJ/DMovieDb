@@ -28,9 +28,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class ___MoviesAdapter extends RecyclerView.Adapter<___MoviesAdapter.ViewHolder> implements Filterable
+public class ___MoviesAdapter extends RecyclerView.Adapter<___MoviesAdapter.ViewHolder>
 {
-    private ArrayList<MovieItem> mArrayList;
     private ArrayList<MovieItem> mFilteredList;
     private Context ctx ;
     int num = 1;
@@ -38,7 +37,6 @@ public class ___MoviesAdapter extends RecyclerView.Adapter<___MoviesAdapter.View
 
     public ___MoviesAdapter(ArrayList<MovieItem> arrayList)
     {
-        mArrayList = arrayList;
         mFilteredList = arrayList;
     }
 
@@ -85,8 +83,7 @@ public class ___MoviesAdapter extends RecyclerView.Adapter<___MoviesAdapter.View
                         Picasso.with(ctx).
                             load(mFilteredList.get(i).getPosterPath())
                             .resize(width_custom, heightt_custom)
-                            //.memoryPolicy(MemoryPolicy.NO_CACHE)
-                            //.centerInside()
+
                             .into(viewHolder.MOVIE_IMAGE, new com.squareup.picasso.Callback() {
                                 @Override
                                 public void onSuccess() {
@@ -147,48 +144,7 @@ public class ___MoviesAdapter extends RecyclerView.Adapter<___MoviesAdapter.View
 
 
 
-    @Override
-    public Filter getFilter()
-    {
-        return new Filter()
-        {
-            @Override
-            protected FilterResults performFiltering(CharSequence charSequence)
-            {
 
-                String charString = charSequence.toString();
-
-                if (charString.isEmpty()) {
-
-                    mFilteredList = mArrayList;
-                } else {
-
-                    ArrayList<MovieItem> filteredList = new ArrayList<>();
-
-                    for (MovieItem movieItem : mArrayList) {
-
-                        if (movieItem.getTitle().toLowerCase().contains(charString))
-                        {
-
-                            filteredList.add(movieItem);
-                        }
-                    }
-
-                    mFilteredList = filteredList;
-                }
-
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = mFilteredList;
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                mFilteredList = (ArrayList<MovieItem>) filterResults.values;
-                notifyDataSetChanged();
-            }
-        };
-    }
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
@@ -228,6 +184,25 @@ public class ___MoviesAdapter extends RecyclerView.Adapter<___MoviesAdapter.View
                     {
                         Toast.makeText(ctx, "No Internet Connection", Toast.LENGTH_SHORT).show();
                     }
+                }
+            });
+
+            MOVIE_IMAGE.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if(CheckNetwork.isInternetAvailable(ctx))
+                    {
+                        Intent i = new Intent(ctx,MovieDetailsActivity.class);
+                        i.putExtra("id",    MOVIE_ID.getText().toString().trim());
+
+                        ctx.startActivity(i);
+                    }
+                    else
+                    {
+                        Toast.makeText(ctx, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             });
         }
