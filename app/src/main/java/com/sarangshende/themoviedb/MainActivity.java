@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = MainActivity.this;
-        Toast.makeText(context, "Landscape onCreate", Toast.LENGTH_SHORT).show();
 
         initRecyclerViewMovies();
 
