@@ -236,7 +236,28 @@
        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
 
+   <TextView
+       android:layout_marginTop="@dimen/margin_8"
+       android:layout_marginLeft="@dimen/m_margin_4"
+       android:layout_marginStart="@dimen/m_margin_4"
+       android:layout_marginRight="@dimen/m_margin_4"
+       android:layout_marginEnd="@dimen/m_margin_4"
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="#d7d7d7"/>
 
+
+   <android.support.v7.widget.RecyclerView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/cast_rcv"
+       />
+
+   <android.support.v7.widget.RecyclerView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/crew_rcv"
+       />
 
 
 

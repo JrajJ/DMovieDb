@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    xmlns:card_view="http://schemas.android.com/tools"
+    card_view:cardBackgroundColor="#ffffff"
+    card_view:cardElevation="0dp"
+    app:cardCornerRadius="0dp"
+    app:layout_constraintCircleRadius="0dp"
+    android:elevation="0dp">
+<LinearLayout
+    android:id="@+id/details_ll"
+    android:layout_marginLeft="@dimen/margin_8"
+    android:layout_marginStart="@dimen/margin_8"
+    android:layout_marginRight="@dimen/margin_8"
+    android:layout_marginEnd="@dimen/margin_8"
+    android:layout_marginTop="@dimen/margin_8"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+        <FrameLayout
+            android:focusable="true"
+            android:layout_margin="@dimen/margin_4"
+            android:id="@+id/loadingPanel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+
+            <ImageButton
+                android:focusable="true"
+                android:layout_gravity="center"
+                android:id="@+id/__CAST_IMAGE"
+                android:background="@android:color/transparent"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dmoviedb"
+                />
+
+        <ProgressBar
+            android:id="@+id/CAST_pb_circular"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:progressDrawable="@drawable/progressbar_drawable"
+            android:layout_height="wrap_content"
+            android:indeterminate="true" />
+
+
+
+        </FrameLayout>
+
+    <TextView
+        android:id="@+id/__CAST_NAME"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginEnd="@dimen/margin_8"
+        android:layout_marginLeft="@dimen/margin_8"
+        android:layout_marginRight="@dimen/margin_8"
+        android:layout_marginStart="@dimen/margin_8"
+        android:layout_marginTop="@dimen/margin_8"
+        android:textColor="#000000"
+        android:text=""
+        android:visibility="gone"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/__CAST_CHARACTER"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginEnd="@dimen/margin_8"
+                android:layout_marginLeft="@dimen/margin_8"
+                android:layout_marginRight="@dimen/margin_8"
+                android:layout_marginStart="@dimen/margin_8"
+                android:layout_marginTop="@dimen/margin_8"
+                android:textColor="#000000"
+                android:text=""
+                android:visibility="gone"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+
+
+
+
+
+</LinearLayout>
+</android.support.v7.widget.CardView>

@@ -2,6 +2,7 @@ package com.sarangshende.themoviedb.interfaces;
 import com.sarangshende.themoviedb.MainActivity;
 import com.sarangshende.themoviedb.MovieDetailsActivity;
 import com.sarangshende.themoviedb.models.AllMovies;
+import com.sarangshende.themoviedb.models.Credits;
 import com.sarangshende.themoviedb.models.MovieDetails;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public interface MovieDBInterface
     Call<MovieDetails> getMovieDetails(@Path("movie_id") String movie_id);
 
     @GET("movie/{movie_id}?credits?api_key=1a6a79594cd3bc582e5eb595cdf691d2")
-    Call<MovieDetails> getCredits(@Path("movie_id") String movie_id);
+    Call<Credits> getCredits(@Path("movie_id") String movie_id);
 
 
 

@@ -7,6 +7,7 @@ import android.graphics.Point;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Display;
@@ -16,9 +17,18 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sarangshende.themoviedb.NetworkCheck.CheckNetwork;
+import com.sarangshende.themoviedb.adapters.___CastAdapter;
+import com.sarangshende.themoviedb.adapters.___CrewAdapter;
+import com.sarangshende.themoviedb.adapters.___MoviesAdapter;
 import com.sarangshende.themoviedb.connecttoserver.ConnectToServer;
 import com.sarangshende.themoviedb.interfaces.MovieDBInterface;
+import com.sarangshende.themoviedb.models.AllMovies;
+import com.sarangshende.themoviedb.models.CastItem;
+import com.sarangshende.themoviedb.models.Credits;
+import com.sarangshende.themoviedb.models.CrewItem;
 import com.sarangshende.themoviedb.models.MovieDetails;
 import com.squareup.picasso.Picasso;
 
@@ -33,9 +43,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MovieDetailsActivity extends AppCompatActivity
 {
     Context context;
-    private RecyclerView mRecyclerViewMovieDetails;
+    private RecyclerView mRecyclerViewCrew,mRecyclerViewCast;
     ProgressDialog mProgressDialog;
+    ___CrewAdapter mAdapterCrew;
+    ___CastAdapter mAdapterCast;
     private ArrayList<MovieDetails> mArrayListMovieDetails;
+    private ArrayList<CrewItem> mArrayListCrew;
+
+    private ArrayList<CastItem> mArrayListCast;
+    private ArrayList<Credits> mArrayListCredits;
+
     Spinner spinner_sort_list;
     TextView MOVIE_NAME,MOVIE_DATE,MOVIE_DESC,MOVIE_ID,MOVIE_RATING,MOVIE_LANGUAGE,MOVIE_VOTES,
             MOVIE_BUDGET,MOVIE_GENRE,MOVIE_PRODUCTION_COMPANY, MOVIE_REVENUE,MOVIE_RUNTIME,MOVIE_TAGLINE;
@@ -58,6 +75,11 @@ public class MovieDetailsActivity extends AppCompatActivity
             String id = b.getString("id");
             Log.e("Id  <--> ", "" + id);
             loadJSONMovieDetails(id);
+            initRecyclerViewCast();
+            initRecyclerViewCrew();
+
+            loadJSONCredits(id);
+            //loadJSONCrew(id);
         }
 
     }
@@ -201,5 +223,156 @@ public class MovieDetailsActivity extends AppCompatActivity
 
     }
 
+
+    //=========================================================================================================
+
+    private void initRecyclerViewCast()
+    {
+
+        mRecyclerViewCast = findViewById(R.id.cast_rcv);
+        //Create new GridLayoutManager
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,
+                1,//span count no of items in single row
+                GridLayoutManager.HORIZONTAL,//Orientation
+                false);//reverse scrolling of recyclerview
+        //set layout manager as gridLayoutManager
+
+        mRecyclerViewCast.setLayoutManager(gridLayoutManager);
+
+    }
+
+    //=========================================================================================================
+
+    private void loadJSONCredits(String movie_id_)
+    {
+        if (CheckNetwork.isInternetAvailable(getApplicationContext())) {
+            Log.e("Inside","--------------------------------------------------------------------------");
+            // Create a progressdialog
+            mProgressDialog = new ProgressDialog(context);
+            // Set progressdialog title
+            mProgressDialog.setTitle("Fetching Data");
+            // Set progressdialog message
+            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+            mProgressDialog.setIndeterminate(false);
+            // Show progressdialog
+            mProgressDialog.show();
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(ConnectToServer.URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            MovieDBInterface request = retrofit.create(MovieDBInterface.class);
+
+            Call<Credits> call = request.getCredits(movie_id_);
+            call.enqueue(new Callback<Credits>()
+            {
+                @Override
+                public void onResponse(@NonNull Call<Credits> call,
+                                       @NonNull Response<Credits> response) {
+
+                    mProgressDialog.dismiss();
+                    Credits jsonResponse = response.body();
+                    assert jsonResponse != null;
+                    mArrayListCast = new ArrayList<>(jsonResponse.getCast());
+                    mAdapterCast = new ___CastAdapter(mArrayListCast);
+                    mRecyclerViewCast.setAdapter(mAdapterCast);
+
+                    mArrayListCrew = new ArrayList<>(jsonResponse.getCrew());
+                    mAdapterCrew = new ___CrewAdapter(mArrayListCrew);
+                    mRecyclerViewCrew.setAdapter(mAdapterCrew);
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<Credits> call, @NonNull Throwable t)
+                {
+                    Log.e("onFailure","--------------------------------------------------------------------------");
+
+                    Log.e("Error", t.getMessage());
+                    mProgressDialog.dismiss();
+                }
+            });
+
+        } else
+        {
+            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    //=========================================================================================================
+
+    private void initRecyclerViewCrew()
+    {
+        mRecyclerViewCrew = findViewById(R.id.crew_rcv);
+        //Create new GridLayoutManager
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,
+                1,//span count no of items in single row
+                GridLayoutManager.HORIZONTAL,//Orientation
+                false);//reverse scrolling of recyclerview
+        //set layout manager as gridLayoutManager
+
+        mRecyclerViewCrew.setLayoutManager(gridLayoutManager);
+
+    }
+
+    //=========================================================================================================
+
+ /*   private void loadJSONCrew(String movie_id_)
+    {
+        if (CheckNetwork.isInternetAvailable(getApplicationContext())) {
+            Log.e("Inside","--------------------------------------------------------------------------");
+            // Create a progressdialog
+            mProgressDialog = new ProgressDialog(context);
+            // Set progressdialog title
+            mProgressDialog.setTitle("Fetching Data");
+            // Set progressdialog message
+            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
+            mProgressDialog.setIndeterminate(false);
+            // Show progressdialog
+            mProgressDialog.show();
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(ConnectToServer.URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            MovieDBInterface request = retrofit.create(MovieDBInterface.class);
+
+            Call<AllMovies> call = request.getCredits(movie_id_);
+            call.enqueue(new Callback<AllMovies>()
+            {
+                @Override
+                public void onResponse(@NonNull Call<AllMovies> call,
+                                       @NonNull Response<AllMovies> response) {
+
+                    mProgressDialog.dismiss();
+                    AllMovies jsonResponse = response.body();
+                    assert jsonResponse != null;
+                    mArrayListCrew = new ArrayList<>(jsonResponse.getItems());
+                    mAdapterCrew = new ___MoviesAdapter(mArrayListCrew);
+                    mRecyclerViewCrew.setAdapter(mAdapterCrew);
+
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<AllMovies> call, @NonNull Throwable t)
+                {
+                    Log.e("onFailure","--------------------------------------------------------------------------");
+
+                    Log.e("Error", t.getMessage());
+                    mProgressDialog.dismiss();
+                }
+            });
+
+        } else
+        {
+            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+    }*/
 
 }
