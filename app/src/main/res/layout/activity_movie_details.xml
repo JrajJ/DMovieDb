@@ -244,24 +244,21 @@
 
    <TextView
        android:layout_marginTop="@dimen/margin_8"
-       android:layout_marginLeft="@dimen/m_margin_4"
-       android:layout_marginStart="@dimen/m_margin_4"
-       android:layout_marginRight="@dimen/m_margin_4"
-       android:layout_marginEnd="@dimen/m_margin_4"
+
+
        android:layout_width="match_parent"
        android:layout_height="1dp"
        android:background="#d7d7d7"/>
 
    <TextView
-       android:layout_marginTop="@dimen/margin_8"
-       android:layout_marginLeft="@dimen/m_margin_4"
-       android:layout_marginStart="@dimen/m_margin_4"
-       android:layout_marginRight="@dimen/m_margin_4"
-       android:layout_marginEnd="@dimen/m_margin_4"
+       android:layout_marginTop="@dimen/margin_10"
+
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:text="Cast"
+       android:textSize="15sp"
        android:textStyle="bold"
+       android:textColor="@color/colorBlack"
        />
 
    <android.support.v7.widget.RecyclerView
@@ -271,21 +268,29 @@
        />
 
    <TextView
-       android:layout_marginTop="@dimen/margin_8"
-       android:layout_marginLeft="@dimen/m_margin_4"
-       android:layout_marginStart="@dimen/m_margin_4"
-       android:layout_marginRight="@dimen/m_margin_4"
-       android:layout_marginEnd="@dimen/m_margin_4"
+       android:layout_marginTop="@dimen/margin_10"
+
+
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="#d7d7d7"/>
+
+   <TextView
+       android:layout_marginTop="@dimen/margin_10"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:text="Crew"
+       android:textSize="15sp"
        android:textStyle="bold"
+       android:textColor="@color/colorBlack"
+
        />
 
    <android.support.v7.widget.RecyclerView
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:id="@+id/crew_rcv"
+       android:layout_marginBottom="@dimen/margin_10"
        />
 
 

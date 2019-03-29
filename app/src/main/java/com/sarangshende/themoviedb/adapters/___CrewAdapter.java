@@ -65,8 +65,8 @@ public class ___CrewAdapter extends RecyclerView.Adapter<___CrewAdapter.ViewHold
         Log.e("width   =   ",""+width);
         Log.e("height   =   ",""+heightt);
 
-        int width_custom = width/4;
-        int heightt_custom = heightt/5;
+        int width_custom = width/3;
+        int heightt_custom = heightt/4;
         Log.e("width_custom   =   ",""+width_custom);
         Log.e("heightt_custom   =   ",""+heightt_custom);
 
