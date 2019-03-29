@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 <LinearLayout
     android:background="@color/gen_white"
     android:id="@+id/details_ll"
@@ -246,15 +252,38 @@
        android:layout_height="1dp"
        android:background="#d7d7d7"/>
 
+   <TextView
+       android:layout_marginTop="@dimen/margin_8"
+       android:layout_marginLeft="@dimen/m_margin_4"
+       android:layout_marginStart="@dimen/m_margin_4"
+       android:layout_marginRight="@dimen/m_margin_4"
+       android:layout_marginEnd="@dimen/m_margin_4"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="Cast"
+       android:textStyle="bold"
+       />
 
    <android.support.v7.widget.RecyclerView
-       android:layout_width="match_parent"
+       android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:id="@+id/cast_rcv"
        />
 
-   <android.support.v7.widget.RecyclerView
+   <TextView
+       android:layout_marginTop="@dimen/margin_8"
+       android:layout_marginLeft="@dimen/m_margin_4"
+       android:layout_marginStart="@dimen/m_margin_4"
+       android:layout_marginRight="@dimen/m_margin_4"
+       android:layout_marginEnd="@dimen/m_margin_4"
        android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="Crew"
+       android:textStyle="bold"
+       />
+
+   <android.support.v7.widget.RecyclerView
+       android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:id="@+id/crew_rcv"
        />
@@ -262,3 +291,4 @@
 
 
 </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

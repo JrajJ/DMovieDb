@@ -1,10 +1,8 @@
 package com.sarangshende.themoviedb.models;
 
 import java.util.List;
-import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 
-@Generated("com.robohorse.robopojogenerator")
 public class Credits{
 
 	@SerializedName("cast")

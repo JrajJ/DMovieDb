@@ -58,6 +58,7 @@ public class MovieDetailsActivity extends AppCompatActivity
             MOVIE_BUDGET,MOVIE_GENRE,MOVIE_PRODUCTION_COMPANY, MOVIE_REVENUE,MOVIE_RUNTIME,MOVIE_TAGLINE;
     ProgressBar pb;
     ImageButton MOVIE_IMAGE;
+    String id__;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -74,11 +75,11 @@ public class MovieDetailsActivity extends AppCompatActivity
         {
             String id = b.getString("id");
             Log.e("Id  <--> ", "" + id);
-            loadJSONMovieDetails(id);
-            initRecyclerViewCast();
-            initRecyclerViewCrew();
 
-            loadJSONCredits(id);
+            loadJSONMovieDetails(id);
+            id__ = id;
+
+            //initRecyclerViewCrew();
             //loadJSONCrew(id);
         }
 
@@ -141,6 +142,8 @@ public class MovieDetailsActivity extends AppCompatActivity
                     assert response.body() != null;
                     mArrayListMovieDetails = new ArrayList<>();
                     mArrayListMovieDetails.add(jsonResponse);
+                    Toast.makeText(context, ""+mArrayListMovieDetails.get(0).getTitle(), Toast.LENGTH_SHORT).show();
+
                     MOVIE_NAME.setText(mArrayListMovieDetails.get(0).getTitle());
                     MOVIE_DATE.setText(mArrayListMovieDetails.get(0).getReleaseDate());
                     MOVIE_DESC.setText(mArrayListMovieDetails.get(0).getOverview());
@@ -181,6 +184,8 @@ public class MovieDetailsActivity extends AppCompatActivity
                                     @Override
                                     public void onSuccess() {
                                         pb.setVisibility(View.GONE);
+
+
                                     }
 
                                     @Override
@@ -199,6 +204,7 @@ public class MovieDetailsActivity extends AppCompatActivity
                                 .into(MOVIE_IMAGE, new com.squareup.picasso.Callback() {
                                     @Override
                                     public void onSuccess() {
+
                                         pb.setVisibility(View.GONE);
                                     }
 
@@ -208,7 +214,14 @@ public class MovieDetailsActivity extends AppCompatActivity
                                     }
                                 });
                     }
+
+                    initRecyclerViewCast();
+                    loadJSONCast(id__);
+                    initRecyclerViewCrew();
+                    loadJSONCrew(id__);
                 }
+
+
 
                 @Override
                 public void onFailure(@NonNull Call<MovieDetails> call, @NonNull Throwable t)
@@ -243,21 +256,10 @@ public class MovieDetailsActivity extends AppCompatActivity
 
     //=========================================================================================================
 
-    private void loadJSONCredits(String movie_id_)
+    private void loadJSONCast(String movie_id_)
     {
         if (CheckNetwork.isInternetAvailable(getApplicationContext())) {
             Log.e("Inside","--------------------------------------------------------------------------");
-            // Create a progressdialog
-            mProgressDialog = new ProgressDialog(context);
-            // Set progressdialog title
-            mProgressDialog.setTitle("Fetching Data");
-            // Set progressdialog message
-            mProgressDialog.setMessage("Loading...");
-            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-
-            mProgressDialog.setIndeterminate(false);
-            // Show progressdialog
-            mProgressDialog.show();
 
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(ConnectToServer.URL)
@@ -273,16 +275,16 @@ public class MovieDetailsActivity extends AppCompatActivity
                 public void onResponse(@NonNull Call<Credits> call,
                                        @NonNull Response<Credits> response) {
 
-                    mProgressDialog.dismiss();
                     Credits jsonResponse = response.body();
                     assert jsonResponse != null;
+                    Toast.makeText(MovieDetailsActivity.this, ""+jsonResponse.getCast().get(0).getName(), Toast.LENGTH_SHORT).show();
                     mArrayListCast = new ArrayList<>(jsonResponse.getCast());
                     mAdapterCast = new ___CastAdapter(mArrayListCast);
                     mRecyclerViewCast.setAdapter(mAdapterCast);
 
-                    mArrayListCrew = new ArrayList<>(jsonResponse.getCrew());
-                    mAdapterCrew = new ___CrewAdapter(mArrayListCrew);
-                    mRecyclerViewCrew.setAdapter(mAdapterCrew);
+
+
+
                 }
 
                 @Override
@@ -291,7 +293,6 @@ public class MovieDetailsActivity extends AppCompatActivity
                     Log.e("onFailure","--------------------------------------------------------------------------");
 
                     Log.e("Error", t.getMessage());
-                    mProgressDialog.dismiss();
                 }
             });
 
@@ -317,24 +318,12 @@ public class MovieDetailsActivity extends AppCompatActivity
         mRecyclerViewCrew.setLayoutManager(gridLayoutManager);
 
     }
-
     //=========================================================================================================
 
- /*   private void loadJSONCrew(String movie_id_)
+    private void loadJSONCrew(String movie_id_)
     {
         if (CheckNetwork.isInternetAvailable(getApplicationContext())) {
             Log.e("Inside","--------------------------------------------------------------------------");
-            // Create a progressdialog
-            mProgressDialog = new ProgressDialog(context);
-            // Set progressdialog title
-            mProgressDialog.setTitle("Fetching Data");
-            // Set progressdialog message
-            mProgressDialog.setMessage("Loading...");
-            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-
-            mProgressDialog.setIndeterminate(false);
-            // Show progressdialog
-            mProgressDialog.show();
 
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(ConnectToServer.URL)
@@ -343,29 +332,27 @@ public class MovieDetailsActivity extends AppCompatActivity
 
             MovieDBInterface request = retrofit.create(MovieDBInterface.class);
 
-            Call<AllMovies> call = request.getCredits(movie_id_);
-            call.enqueue(new Callback<AllMovies>()
+            Call<Credits> call = request.getCredits(movie_id_);
+            call.enqueue(new Callback<Credits>()
             {
                 @Override
-                public void onResponse(@NonNull Call<AllMovies> call,
-                                       @NonNull Response<AllMovies> response) {
+                public void onResponse(@NonNull Call<Credits> call,
+                                       @NonNull Response<Credits> response) {
 
-                    mProgressDialog.dismiss();
-                    AllMovies jsonResponse = response.body();
+                    Credits jsonResponse = response.body();
                     assert jsonResponse != null;
-                    mArrayListCrew = new ArrayList<>(jsonResponse.getItems());
-                    mAdapterCrew = new ___MoviesAdapter(mArrayListCrew);
-                    mRecyclerViewCrew.setAdapter(mAdapterCrew);
 
+                    mArrayListCrew = new ArrayList<>(jsonResponse.getCrew());
+                    mAdapterCrew = new ___CrewAdapter(mArrayListCrew);
+                    mRecyclerViewCrew.setAdapter(mAdapterCrew);
                 }
 
                 @Override
-                public void onFailure(@NonNull Call<AllMovies> call, @NonNull Throwable t)
+                public void onFailure(@NonNull Call<Credits> call, @NonNull Throwable t)
                 {
                     Log.e("onFailure","--------------------------------------------------------------------------");
 
                     Log.e("Error", t.getMessage());
-                    mProgressDialog.dismiss();
                 }
             });
 
@@ -373,6 +360,6 @@ public class MovieDetailsActivity extends AppCompatActivity
         {
             Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
         }
-    }*/
+    }
 
 }
