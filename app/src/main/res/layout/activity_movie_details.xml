@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:background="@color/gen_white"
     android:id="@+id/details_ll"
-    android:layout_marginLeft="@dimen/margin_8"
-    android:layout_marginStart="@dimen/margin_8"
-    android:layout_marginRight="@dimen/margin_8"
-    android:layout_marginEnd="@dimen/margin_8"
-    android:layout_marginTop="@dimen/margin_8"
+    android:layout_margin="@dimen/margin_8"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
    <TextView
        android:padding="0dp"
        android:id="@+id/__MOVIE_DETAILS_NAME"
-       android:text="Name"
+       android:text=""
        android:textStyle="bold"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
@@ -23,13 +20,13 @@
        />
 
    <TextView
-       android:layout_marginTop="@dimen/margin_6"
-       android:layout_marginBottom="@dimen/margin_4"
+       android:layout_marginTop="@dimen/margin_4"
+       android:layout_marginBottom="@dimen/margin_6"
        android:id="@+id/__MOVIE_DETAILS_TAGLINE"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:textColor="#000000"
-       android:text="Tagline"
+       android:textColor="@color/colorAccent"
+       android:text=""
        android:textSize="15sp"
        android:lines="1"
        android:maxLines="2"
@@ -45,7 +42,6 @@
 
       <FrameLayout
           android:focusable="true"
-          android:layout_margin="@dimen/margin_2"
           android:id="@+id/loadingPanel"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
@@ -85,39 +81,40 @@
 
 
          <LinearLayout
-             android:layout_marginTop="@dimen/margin_2"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:orientation="horizontal"
              >
 
          <TextView
-             android:layout_gravity="top|start"
              android:id="@+id/__MOVIE_DETAILS_RATING"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:textColor="@color/colorGreen"
-             android:text="8.7"
-             android:textStyle="bold"
+             android:textColor="@color/gen_white"
              android:padding="@dimen/margin_4"
-             android:textSize="13sp"
+             android:background="@color/colorGreen"
+             android:text=""
+             android:textStyle="bold"
+             android:textSize="15sp"
+             android:typeface="sans"
+
              android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
             <TextView
-                android:layout_gravity="top|start"
-
-                android:layout_marginTop="@dimen/margin_6"
+                android:padding="@dimen/margin_4"
                 android:id="@+id/__MOVIE_DETAILS_VOTES"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:text="2549 Votes"
-                android:textSize="14sp"
+                android:textColor="@color/colorGrey"
+                android:text=""
+                android:typeface="sans"
+
+
+                android:textSize="15sp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
          </LinearLayout>
 
          <LinearLayout
-             android:layout_marginTop="@dimen/margin_2"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:orientation="horizontal"
@@ -128,8 +125,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
-                android:text="Genre"
-                android:textSize="14sp"
+                android:text=""
+                android:typeface="sans"
+
+                android:textSize="15sp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
             <TextView
@@ -138,8 +137,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
-                android:text="Runtime"
-                android:textSize="14sp"
+                android:text=""
+                android:typeface="sans"
+
+                android:textSize="15sp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
 
@@ -147,7 +148,7 @@
          </LinearLayout>
 
          <LinearLayout
-             android:layout_marginTop="@dimen/margin_2"
+             android:layout_marginTop="@dimen/margin_6"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:orientation="horizontal"
@@ -159,20 +160,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlack"
-                android:text="EN"
+                android:text=""
                 android:typeface="sans"
                 android:textAllCaps="true"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
             <TextView
                 android:id="@+id/__MOVIE_DETAILS_DATE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Date"
+                android:text=""
                 android:typeface="sans"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
          </LinearLayout>
@@ -184,8 +185,10 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:textColor="#000000"
-             android:text="Production Company Name"
-             android:textSize="14sp"
+             android:text=""
+             android:textSize="15sp"
+             android:typeface="sans"
+
              android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
 
@@ -202,8 +205,8 @@
 
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:text="Description"
-       android:textSize="13sp"
+       android:text=""
+       android:textSize="14sp"
        android:minLines="5"
        android:maxLines="6"
        android:textColor="@color/colorGrey"
@@ -214,8 +217,8 @@
        android:id="@+id/__MOVIE_DETAILS_BUDGET"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:textColor="#000000"
-       android:text="Budget"
+       android:textColor="@color/colorAccent"
+       android:text=""
        android:textSize="14sp"
        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
@@ -225,8 +228,8 @@
        android:id="@+id/__MOVIE_DETAILS_REVENUE"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:textColor="#000000"
-       android:text="Revenue"
+       android:textColor="@color/colorAccent"
+       android:text=""
        android:textSize="14sp"
        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
@@ -255,13 +258,5 @@
 
 
 
-   <TextView
-       android:layout_marginTop="@dimen/margin_8"
-       android:layout_marginLeft="@dimen/m_margin_4"
-       android:layout_marginStart="@dimen/m_margin_4"
-       android:layout_marginRight="@dimen/m_margin_4"
-       android:layout_marginEnd="@dimen/m_margin_4"
-       android:layout_width="match_parent"
-       android:layout_height="1dp"
-       android:background="#d7d7d7"/>
+
 </LinearLayout>

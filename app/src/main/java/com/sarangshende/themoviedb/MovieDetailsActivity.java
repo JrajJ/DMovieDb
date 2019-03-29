@@ -125,13 +125,13 @@ public class MovieDetailsActivity extends AppCompatActivity
                     MOVIE_ID.setText(String.valueOf(mArrayListMovieDetails.get(0).getId()));
                     MOVIE_RATING.setText(String.valueOf(mArrayListMovieDetails.get(0).getVoteAverage()));
                     MOVIE_LANGUAGE.setText(mArrayListMovieDetails.get(0).getOriginalLanguage()+" | ");
-                    MOVIE_VOTES.setText(" | "+String.valueOf(mArrayListMovieDetails.get(0).getVoteCount())+" Votes");
+                    MOVIE_VOTES.setText(" ("+String.valueOf(mArrayListMovieDetails.get(0).getVoteCount())+" Votes)");
                     MOVIE_BUDGET.setText("Budget : "+String.valueOf(mArrayListMovieDetails.get(0).getBudget()));
-                    MOVIE_GENRE.setText(mArrayListMovieDetails.get(0).getGenres().get(0).getName()+" | ");
+                    MOVIE_GENRE.setText(mArrayListMovieDetails.get(0).getGenres().get(0).getName()+", ");
                     MOVIE_REVENUE.setText("Revenue : "+String.valueOf(mArrayListMovieDetails.get(0).getRevenue()));
                     MOVIE_TAGLINE.setText(mArrayListMovieDetails.get(0).getTagline());
-                    MOVIE_RUNTIME.setText(String.valueOf(mArrayListMovieDetails.get(0).getRuntime())+"Mins");
-                    MOVIE_PRODUCTION_COMPANY.setText(mArrayListMovieDetails.get(0).getProductionCompanies().get(0).getName()+" | "+
+                    MOVIE_RUNTIME.setText(String.valueOf(mArrayListMovieDetails.get(0).getRuntime())+" Mins");
+                    MOVIE_PRODUCTION_COMPANY.setText(mArrayListMovieDetails.get(0).getProductionCompanies().get(0).getName()+", "+
                             mArrayListMovieDetails.get(0).getProductionCompanies().get(0).getOriginCountry());
 
 
