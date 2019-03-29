@@ -2,6 +2,7 @@ package com.sarangshende.themoviedb.models;
 
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
+import com.sarangshende.themoviedb.connecttoserver.ConnectToServer;
 
 public class MovieDetails{
 
@@ -204,8 +205,9 @@ public class MovieDetails{
 		this.posterPath = posterPath;
 	}
 
-	public String getPosterPath(){
-		return posterPath;
+	public String getPosterPath()
+	{
+		return ConnectToServer.IMAGE_PATH + posterPath;
 	}
 
 	public void setSpokenLanguages(List<SpokenLanguagesItem> spokenLanguages){

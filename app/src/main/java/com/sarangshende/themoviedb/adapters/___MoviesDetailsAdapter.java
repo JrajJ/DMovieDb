@@ -66,7 +66,7 @@ public class ___MoviesDetailsAdapter extends RecyclerView.Adapter<___MoviesDetai
         viewHolder.MOVIE_REVENUE.setText(Integer.toString(mFilteredList.get(i).getRevenue()));
         viewHolder.MOVIE_TAGLINE.setText(mFilteredList.get(i).getTagline());
 
-        ArrayList<GenresItem> genreList = new ArrayList<>(mFilteredList.get(i).getGenres());
+        /*ArrayList<GenresItem> genreList = new ArrayList<>(mFilteredList.get(i).getGenres());
         ArrayList<ProductionCompaniesItem> productionCompanyList = new ArrayList<>(mFilteredList.get(i).getProductionCompanies());
         String genre_str = "",production_company_str = "";
         for(i=0;i<genreList.size();i++)
@@ -77,9 +77,9 @@ public class ___MoviesDetailsAdapter extends RecyclerView.Adapter<___MoviesDetai
         for(i=0;i<productionCompanyList.size();i++)
         {
             production_company_str = production_company_str.concat(productionCompanyList.get(i).getName());
-        }
-        viewHolder.MOVIE_GENRE.setText(genre_str);
-        viewHolder.MOVIE_PRODUCTION_COMPANY.setText(production_company_str);
+        }*/
+        viewHolder.MOVIE_GENRE.setText("Genre____");
+        viewHolder.MOVIE_PRODUCTION_COMPANY.setText("Production Compny");
 
 
 
@@ -180,8 +180,9 @@ public class ___MoviesDetailsAdapter extends RecyclerView.Adapter<___MoviesDetai
             MOVIE_RATING    = view.findViewById(R.id.__MOVIE_DETAILS_RATING);
             MOVIE_LANGUAGE  = view.findViewById(R.id.__MOVIE_DETAILS_LANGUAGE);
             MOVIE_VOTES     = view.findViewById(R.id.__MOVIE_DETAILS_VOTES);
-            pb              = view.findViewById(R.id.progress_bar_circular);
-            MOVIE_BUDGET     = view.findViewById(R.id.__MOVIE_DETAILS_BUDGET);
+            pb              = view.findViewById(R.id.movie_details_pb_circular);
+            MOVIE_IMAGE     = view.findViewById(R.id.__MOVIE_DETAILS_IMAGE);
+            MOVIE_BUDGET    = view.findViewById(R.id.__MOVIE_DETAILS_BUDGET);
             MOVIE_GENRE     = view.findViewById(R.id.__MOVIE_DETAILS_GENRE);
             MOVIE_PRODUCTION_COMPANY     = view.findViewById(R.id.__MOVIE_DETAILS_PRDC_COMPANY_NAME);
             MOVIE_REVENUE     = view.findViewById(R.id.__MOVIE_DETAILS_REVENUE);
