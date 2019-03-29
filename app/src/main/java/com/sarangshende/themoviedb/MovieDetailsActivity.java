@@ -11,6 +11,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Display;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
@@ -66,7 +67,7 @@ public class MovieDetailsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
         context = MovieDetailsActivity.this;
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         viewsInitialization();
 
         Intent i = getIntent();
@@ -142,7 +143,6 @@ public class MovieDetailsActivity extends AppCompatActivity
                     assert response.body() != null;
                     mArrayListMovieDetails = new ArrayList<>();
                     mArrayListMovieDetails.add(jsonResponse);
-                    Toast.makeText(context, ""+mArrayListMovieDetails.get(0).getTitle(), Toast.LENGTH_SHORT).show();
 
                     MOVIE_NAME.setText(mArrayListMovieDetails.get(0).getTitle());
                     MOVIE_DATE.setText(mArrayListMovieDetails.get(0).getReleaseDate());
@@ -277,7 +277,6 @@ public class MovieDetailsActivity extends AppCompatActivity
 
                     Credits jsonResponse = response.body();
                     assert jsonResponse != null;
-                    Toast.makeText(MovieDetailsActivity.this, ""+jsonResponse.getCast().get(0).getName(), Toast.LENGTH_SHORT).show();
                     mArrayListCast = new ArrayList<>(jsonResponse.getCast());
                     mAdapterCast = new ___CastAdapter(mArrayListCast);
                     mRecyclerViewCast.setAdapter(mAdapterCast);
@@ -362,4 +361,17 @@ public class MovieDetailsActivity extends AppCompatActivity
         }
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+
+
+        }
+        return true;
+    }
 }
