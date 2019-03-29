@@ -22,7 +22,9 @@ public interface MovieDBInterface
     @GET("movie/{movie_id}?api_key=1a6a79594cd3bc582e5eb595cdf691d2&language=en-US")
     Call<MovieDetails> getMovieDetails(@Path("movie_id") String movie_id);
 
-   /* @GET("movie/299537?api_key=1a6a79594cd3bc582e5eb595cdf691d2&language=en-US")
-    Call<MovieDetails> getMovieDetails();*/
+    @GET("movie/{movie_id}?credits?api_key=1a6a79594cd3bc582e5eb595cdf691d2")
+    Call<MovieDetails> getCredits(@Path("movie_id") String movie_id);
+
+
 
 }

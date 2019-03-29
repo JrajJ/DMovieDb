@@ -38,9 +38,8 @@ public class SplashActivity extends AppCompatActivity
     ImageView iv;
     private Handler progressBarHandler = new Handler();
 
-    private View mLoadingView;
+    View mLoadingView;
     TextView tv_internet_;
-    SharedPreferences prefs;
     Context context;
 
 
@@ -55,7 +54,7 @@ public class SplashActivity extends AppCompatActivity
         ctx = this;
         tv_internet_ = findViewById(R.id.tv_internet);
 
-        prefs = getApplicationContext().getSharedPreferences("status", Context.MODE_PRIVATE);
+
         context = SplashActivity.this;
 
 
@@ -90,8 +89,7 @@ public class SplashActivity extends AppCompatActivity
                     progressBarHandler.post(new Runnable() {
                         public void run()
                         {
-                            //if (CheckNetwork.isInternetAvailable(getApplicationContext()))
-                            //mLoadingView.setVisibility(View.GONE);
+
                         }
                     });
                 }
@@ -100,14 +98,15 @@ public class SplashActivity extends AppCompatActivity
                     try {
                         Thread.sleep(2000);
 
-
+                        Intent intent  = new Intent(context,MainActivity.class);
+                        startActivity(intent);
+                        finish();
 
 
                         } catch(InterruptedException e)
                         {
                             e.printStackTrace();
                         }
-                        // close the progress bar dialog
 
 
 

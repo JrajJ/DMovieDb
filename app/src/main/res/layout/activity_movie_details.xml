@@ -34,7 +34,6 @@
 
    <LinearLayout
        android:background="@color/gen_white"
-
        android:id="@+id/productContent"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
@@ -56,7 +55,6 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:scaleType="fitCenter"
-
              />
 
          <ProgressBar
@@ -66,7 +64,6 @@
              android:progressDrawable="@drawable/progressbar_drawable"
              android:layout_height="wrap_content"
              android:indeterminate="true" />
-
 
 
       </FrameLayout>
@@ -97,7 +94,6 @@
              android:textStyle="bold"
              android:textSize="15sp"
              android:typeface="sans"
-
              android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
             <TextView
@@ -108,10 +104,9 @@
                 android:textColor="@color/colorGrey"
                 android:text=""
                 android:typeface="sans"
-
-
                 android:textSize="15sp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
          </LinearLayout>
 
          <LinearLayout
@@ -127,7 +122,6 @@
                 android:textColor="#000000"
                 android:text=""
                 android:typeface="sans"
-
                 android:textSize="15sp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
@@ -139,7 +133,6 @@
                 android:textColor="#000000"
                 android:text=""
                 android:typeface="sans"
-
                 android:textSize="15sp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
@@ -188,12 +181,7 @@
              android:text=""
              android:textSize="15sp"
              android:typeface="sans"
-
              android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-
-
-
-
 
 
       </LinearLayout>
@@ -202,7 +190,6 @@
    <TextView
        android:layout_marginTop="@dimen/margin_6"
        android:id="@+id/__MOVIE_DETAILS_DESC"
-
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:text=""
@@ -234,16 +221,10 @@
        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
 
-
-
-
-
-
    <TextView
        android:id="@+id/__MOVIE_DETAILS_ID"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-
        android:layout_marginEnd="@dimen/margin_8"
        android:layout_marginLeft="@dimen/margin_8"
        android:layout_marginRight="@dimen/margin_8"

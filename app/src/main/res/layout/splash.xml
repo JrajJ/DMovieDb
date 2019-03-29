@@ -11,11 +11,12 @@
 
     <ImageView
         android:id="@+id/iv_splash"
+        android:padding="@dimen/margin_30"
         android:background="@color/gen_white"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginBottom="@dimen/margin_30"
-        android:src="@drawable/student"
+        android:src="@drawable/dmoviedb"
          />
 
     <ProgressBar
